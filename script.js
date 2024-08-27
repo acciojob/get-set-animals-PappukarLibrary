@@ -1,40 +1,21 @@
-class Animal {
-  constructor(private _species: string) {}
+() => {
+  cy.visit(baseUrl + "/main.html");
+  cy.window().then((win) => {
+    const Cat = win.Cat;
 
-  // Getter for the species
-  get species(): string {
-    return this._species;
-  }
+    // Stub the console.log method
+    cy.stub(win.console, "log").as("consoleLog");
 
-  // Method to log the sound the animal makes
-  makeSound(): void {
-    console.log(`The ${this._species} makes a sound`);
-  }
+    // Create a new Cat instance and test methods
+    const species = "Siamese";
+    const myCat = new Cat(species);
+
+    // Test makeSound method
+    myCat.makeSound();
+    cy.get("@consoleLog").should("be.calledWith", `The ${species} makes a sound`);
+
+    // Test purr method
+    myCat.purr();
+    cy.get("@consoleLog").should("be.calledWith", `purr`);
+  });
 }
-
-class Dog extends Animal {
-  constructor(species: string) {
-    super(species);
-  }
-
-  // Method to log "woof"
-  bark(): void {
-    console.log("woof");
-  }
-}
-
-class Cat extends Animal {
-  constructor(species: string) {
-    super(species);
-  }
-
-  // Method to log "purr"
-  purr(): void {
-    console.log("purr");
-  }
-}
-
-// Do not change the code below this line
-(window as any).Animal = Animal;
-(window as any).Dog = Dog;
-(window as any).Cat = Cat;
