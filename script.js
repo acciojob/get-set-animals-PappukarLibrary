@@ -1,6 +1,5 @@
-//complete this code
 class Animal {
-	  constructor(private _species: string) {}
+  constructor(private _species: string) {}
 
   // Getter for the species
   get species(): string {
@@ -14,7 +13,7 @@ class Animal {
 }
 
 class Dog extends Animal {
-	 constructor(species: string) {
+  constructor(species: string) {
     super(species);
   }
 
@@ -22,11 +21,10 @@ class Dog extends Animal {
   bark(): void {
     console.log("woof");
   }
-	
 }
 
 class Cat extends Animal {
-	 constructor(species: string) {
+  constructor(species: string) {
     super(species);
   }
 
@@ -35,10 +33,8 @@ class Cat extends Animal {
     console.log("purr");
   }
 }
-	
-}
 
 // Do not change the code below this line
-window.Animal = Animal;
-window.Dog = Dog;
-window.Cat = Cat;
+(window as any).Animal = Animal;
+(window as any).Dog = Dog;
+(window as any).Cat = Cat;
